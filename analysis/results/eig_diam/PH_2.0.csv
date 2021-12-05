@@ -1,0 +1,13 @@
+network,range,month,spectral_radius,spectral_radius_unweighted,diameter
+../../../SPREAD_multipathway_simulator/networks/PH,2.0,1,0.15714490101275386,32.10755460791119,31
+../../../SPREAD_multipathway_simulator/networks/PH,2.0,2,0.18198111816997214,32.10755460791124,31
+../../../SPREAD_multipathway_simulator/networks/PH,2.0,3,0.22173685338182952,32.10755460791119,31
+../../../SPREAD_multipathway_simulator/networks/PH,2.0,4,0.23499711154784447,32.51784936557637,31
+../../../SPREAD_multipathway_simulator/networks/PH,2.0,5,0.06951665572278132,32.517849365576325,31
+../../../SPREAD_multipathway_simulator/networks/PH,2.0,6,0.03300001816321882,32.5178493655764,31
+../../../SPREAD_multipathway_simulator/networks/PH,2.0,7,0.026452470656504763,27.18922557372446,31
+../../../SPREAD_multipathway_simulator/networks/PH,2.0,8,0.03328643708561474,27.18922557372445,31
+../../../SPREAD_multipathway_simulator/networks/PH,2.0,9,0.02661957759472161,27.18922557372454,31
+../../../SPREAD_multipathway_simulator/networks/PH,2.0,10,0.037950329799987595,32.0874809275162,31
+../../../SPREAD_multipathway_simulator/networks/PH,2.0,11,0.132086569732683,32.087480927516154,31
+../../../SPREAD_multipathway_simulator/networks/PH,2.0,12,0.15512184802547924,32.0874809275162,31

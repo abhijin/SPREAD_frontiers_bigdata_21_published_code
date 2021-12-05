@@ -1,0 +1,17 @@
+# This CITATION.cff file was generated with cffinit.
+# Visit https://bit.ly/cffinit to generate yours today!
+
+cff-version: 1.2.0
+title: >-
+  Network Models and Simulation Analytics for
+  Multi-scale Dynamics of Biological Invasion
+message: >-
+  Please cite this software using the metadata from
+  'preferred-citation'.
+type: software
+authors:
+  - given-names: Abhijin
+    family-names: Adiga
+    email: abhijin@virginia.edu
+    affiliation: University of Virginia
+  - {}

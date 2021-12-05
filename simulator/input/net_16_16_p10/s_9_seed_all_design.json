@@ -1,0 +1,19 @@
+{
+    "network": "/sfs/qumulo/qproject/biocomplexity/abhijin/SPREAD_frontiers_bigdata/synthetic_networks/work/k_16/r_4/s_16/HL_clique/FLD_ER/p_10/seed_9",
+    "unwanted_network_prefix": "/sfs/qumulo/qproject/biocomplexity/abhijin/SPREAD_frontiers_bigdata/synthetic_networks/work/",
+    "time_steps": 24,
+    "dag_type": 0,
+    "seeding_specification": "folder",
+
+    "experiments": {
+        "exposure_delay": [0], 
+        "alpha_S": [0, 0.001, 0.005, 0.01, 0.015],
+        "alpha_L": [0, 0.001, 0.005, 0.01, 0.015],
+        "alpha_LD": [0, 0.001, 0.005, 0.01, 0.015],
+        "number_of_simulations": [100],
+        "moore_range": [1, 2, 3],
+        "start_month": [1],
+        "random_seed": [1],
+        "seeding": "/sfs/qumulo/qproject/biocomplexity/abhijin/SPREAD_frontiers_bigdata/synthetic_networks/work/k_16/r_4/s_16/HL_clique/FLD_ER/p_10/seed_9/seed_all.csv"
+    }
+}

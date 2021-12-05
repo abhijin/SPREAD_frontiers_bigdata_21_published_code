@@ -1,0 +1,19 @@
+{
+    "network": "/sfs/qumulo/qproject/biocomplexity/abhijin/SPREAD_multipathway_simulator/networks/BD",
+    "unwanted_network_prefix": "/sfs/qumulo/qproject/biocomplexity/abhijin/SPREAD_multipathway_simulator/networks/",
+    "time_steps": 24,
+    "dag_type": 0,
+    "seeding_specification": "file",
+
+    "experiments": {
+        "exposure_delay": [0], 
+        "alpha_S": [0.1, 0.5, 1, 5, 10],
+        "alpha_L": [0.1, 0.5, 1, 5, 10],
+        "alpha_LD": [0.1, 0.5, 1, 5, 10],
+        "number_of_simulations": [100],
+        "moore_range": [1, 2, 3],
+        "start_month": [5],
+        "random_seed": [1],
+        "seeding": "/sfs/qumulo/qproject/biocomplexity/abhijin/SPREAD_multipathway_simulator/seeding/BD/seed_BD_Rangpur_first_report.csv"
+    }
+}

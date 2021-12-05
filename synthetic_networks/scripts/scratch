@@ -1,0 +1,145 @@
+
+def update_task(conn, task):
+    """
+    update priority, begin_date, and end date of a task
+    :param conn:
+    :param task:
+    :return: project id
+    """
+    # sql variable is defunct
+    sql = ''' UPDATE projects
+              SET   localityType = ?,
+                    diameter = ?,
+                    mooreRange = ?,
+                    rowLength = ?,
+                    squareRowSize = ?,
+                    whiteNodeRows = ?,
+                    LDGraphType = ?,
+                    maxCoreNumber = ?,
+                    spectralRadius = ?'''
+    # inserting into which columns in the sql file order of variables and columns.
+    sqlite_insert_with_param = """INSERT INTO projects
+                          (localityType, diameter, mooreRange, rowLength, squareRowSize, whiteNodeRows, LDGraphType, maxCoreNumber, spectralRadius)
+                          VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);"""
+    # inserting into sql file.
+    cur = conn.cursor()
+    cur.execute(sqlite_insert_with_param, task)
+    conn.commit()
+
+                # AA: is x<=moore necessary?
+                # AA: is row-y or col-x necessary?
+                ## if col + x < side and row + y < side and x <= moore and y <= moore and not (x==0 and y == 0) and distance <= rangeSquared:
+                ##     a.add_edge((row,col),(row+y,(col+x)))
+                ## if col + x < side and row - y >= 0 and x <= moore and y <= moore and not (x==0 and y == 0) and distance <= rangeSquared:
+                ##     a.add_edge((row,col),(row-y,(col+x)))
+                ## if col - x >= 0 and row + y < side and x <= moore and y <= moore and not (x==0 and y == 0) and distance <= rangeSquared:
+                ##     a.add_edge((row,col),(row+y,(col-x)))
+                ## if col - x >= 0 and row - y >= 0 and x <= moore and y <= moore and not (x==0 and y == 0) and distance <= rangeSquared:
+                ##     a.add_edge((row,col),(row-y,(col-x)))
+def create_table(conn, create_table_sql):
+    """ create a table from the create_table_sql statement
+    :param conn: Connection object
+    :param create_table_sql: a CREATE TABLE statement
+    :return:
+    """
+    try:
+        # Creates a table if table is not already created.
+        c = conn.cursor()
+        c.execute(create_table_sql)
+        conn.commit()
+        c.close()
+    except Error as e:
+        print(e)
+
+    #print(betweennessUnweighted)
+    # AA: the below two betweenness are used for weighted graphs.
+    # betweennessInvWeighted = nx.betweenness_centrality(G,weight='invweight') #Measures betweensness but invweighted
+    # betweennessNegLogWeighted = nx.betweenness_centrality(G,weight='invlogweight') #measures betweeness negative log weight
+    #np.set_printoptions(threshold=np.inf)
+    #plt.figure(figsize=(15, 15))
+    #pos = {(x, y): (y, -x) for x, y in G.nodes()}
+    #nx.draw(G, pos=pos,
+           # node_color='lightgreen',
+            #with_labels=False,
+            #node_size=600)
+    #pos = {(x, y): (y, -x) for x, y in GL.nodes()}
+    #nx.draw_networkx_edges(GLD, pos=pos,edge_color='red')
+    #pos = {(x, y): (y, -x) for x, y in GL.nodes()}
+    #nx.draw(GL, pos=pos, node_color='blue',with_labels=False,node_size=600)
+    #pos = {(x, y): (y, -x) for x, y in GL.nodes()}
+    #nx.draw_networkx_edges(GL, pos=pos,edge_color='yellow')
+    #plt.savefig("Graph3.png")
+    #plt.clf()
+    #heat_map_nodes(G,GS,GL,GLD,betweennessUnweighted)
+def heat_map_nodes(G,GS,GL,GLD,betweenness):
+    betweenesValues = betweenness.values()
+    maxBetweeness = max(betweenesValues)
+    #print(maxBetweeness)
+    colorMap = []
+    #plt.figure(2)
+    pos = {(x, y): (y, -x) for x, y in G.nodes()}
+    #print(pos)
+    nodes = G.nodes()
+    nodes = sorted(nodes, key=lambda tup: (tup[0], tup[1]))
+    H = nx.Graph() #there was an error when I did the heatmap based off of just the original graph G because when I put the nodes into the graph originally they weren't put in order properly so trying to add colors messed up. I created a new graph this time with all the nodes in the proper ascending order and it worked this time
+    H.add_nodes_from(nodes)
+    H.add_edges_from(GS.edges())
+    pos = {(x, y): (y, -x) for x, y in H.nodes()}
+    for node in H.nodes():
+        if betweenness[node] < maxBetweeness/6:
+            colorMap.append('#f5ffbd')
+            #print(node, " light yellow ", betweenness[node])
+
+        elif betweenness[node] < maxBetweeness/3:
+            colorMap.append('#f5e042')
+            #print(node, " yellow ", betweenness[node])
+        elif betweenness[node] < maxBetweeness/2:
+            colorMap.append('#ffca2b')
+            #print(node, " light orange ", betweenness[node])
+        elif betweenness[node] < 2*maxBetweeness/3:
+            colorMap.append('#ffbf00')
+            #print(node, " orange ", betweenness[node])
+        elif betweenness[node] < 5*maxBetweeness/6:
+            colorMap.append('#ff4720')
+            #print(node, " light red ", betweenness[node])
+        elif betweenness[node] <= maxBetweeness:
+            colorMap.append('#cc2400')
+            #print(node, " red ", betweenness[node])
+    nx.draw(H, pos=pos,
+            node_color=colorMap,
+            with_labels=True,
+            node_size=600)
+    plt.savefig("Graph2.png")
+    laplacian = 0
+    laplacian2 = 0
+    #if args.number_of_nodes != 1:
+        #laplacianMatrix = nx.laplacian_matrix(G)
+        #laplacianMatrix = laplacianMatrix.astype(float)
+        #laplacianEigen = eigs(laplacianMatrix)
+        #print(laplacianEigen)
+        #laplacianEigen = np.matrix(laplacianEigen)
+        #Laplacian = np.max(laplacianEigen)
+        #laplacian = laplacianEigen[len(laplacianEigen)-1]
+        #laplacian2 = laplacianEigen[len(laplacianEigen)-2]
+
+
+
+					currentRange=$minRange+calc $range * $rangeIncrement 
+					#echo $numNodes
+					if (( $numNodes>=regionalNumber )) && (( $(($numNodes/regionalNumber))>=$localitySize )) && (( $(($(($numNodes/regionalNumber))%2))==$(($localitySize%2)) ))
+					then
+						#p[6]=$numNodes
+						#p[8]=$regionalNumber
+						#p[12]=$localitySize
+						#p[14]=${localities[$localityType]}
+						#p[16]=${long_distance_types[$longDistance]}
+						#p[18]=$t
+						#"${p[@]}" #call sbatch command right here			
+						#echo "${p[@]}"
+#module load anaconda/2020.11-py3.8
+						#echo $numNodes
+						#echo $regionalNumber
+						echo ""
+					fi
+
+#"${p[@]}" &> sum.txt
